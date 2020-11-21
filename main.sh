@@ -45,7 +45,7 @@ CheckFolderStructure(){
             mkdir $dir
         fi
     done
-        
+    echo " Diretorias 🆗"
 }
 
 echo "Bem vindo ao gerador de corpus para o Eugénio V3!"
