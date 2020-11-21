@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
-SWITCHBOARD_FILE="switchboardd.zip"
+
+SWITCHBOARD_FILE="switchboard.zip"
+DIRS=("scripts" "corpus" "corpus_txt" "corpus_info" "words_dic" "sentences_dic")
+
 
 Switchboard(){
     echo -e "🔎 Localizando o ficheiro $SWITCHBOARD_FILE\n"
@@ -29,7 +32,22 @@ Switchboard(){
     fi
 }
 
+CheckFolderStructure(){
+    echo -e "\n🛠  Incializando a verificação da estrutura de diretorias\n"
+    for dir in ${DIRS[@]};
+    do
+        echo -n "🔎  Verificando a existência da diretoria '$dir'"
+        if [ -d $dir ]; then
+            echo " ✅"
+        else
+            echo " ❌"
+            echo "    📂 diretoria inexistente criando diretoria '$dir'"
+            mkdir $dir
+        fi
+    done
+        
+}
+
 echo "Bem vindo ao gerador de corpus para o Eugénio V3!"
 echo "-------------------------------------------------"
-Switchboard
-echo $SWITCHBOARD_FILE
+CheckFolderStructure
