@@ -5,7 +5,7 @@ SWITCHBOARD_FILE="switchboard.zip"
 DIRS=("scripts" "corpus" "corpus_txt" "corpus_info" "words_dic" "sentences_dic")
 
 
-Switchboard(){
+SwitchBoard(){
     echo -e "🔎 Localizando o ficheiro $SWITCHBOARD_FILE\n"
     if [ -f $SWITCHBOARD_FILE ]; then
         echo "✅ Ficheiro $SWITCHBOARD_FILE encontrado"
@@ -51,3 +51,4 @@ CheckFolderStructure(){
 echo "Bem vindo ao gerador de corpus para o Eugénio V3!"
 echo "-------------------------------------------------"
 CheckFolderStructure
+SwitchBoard
