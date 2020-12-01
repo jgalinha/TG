@@ -7,13 +7,15 @@ SWITCHBOARD_FILE="switchboard.zip"
 DIRS=("scripts" "corpus" "corpus_txt" "corpus_info" "words_dic" "sentences_dic")
 FILE_LOCATED=false
 DIR_STRUCT_OK=false
+felling="sleep 0.5"
 
 # Função que procura o ficheiro do switchboard e se não encontrar solicita a sua
 # localização
 SwitchBoard(){
-    echo -e "🔎 Localizando o ficheiro $SWITCHBOARD_FILE\n"
+    echo "🔎 Localizando o ficheiro $SWITCHBOARD_FILE"
+    $felling
     if [ -f $SWITCHBOARD_FILE ]; then # Verifica se o fich. se encontra na dir
-        echo "✅ Ficheiro $SWITCHBOARD_FILE encontrado"
+        echo -e "✅ Ficheiro $SWITCHBOARD_FILE encontrado\n"
         FILE_LOCATED=true
     else
         while :
@@ -29,7 +31,7 @@ SwitchBoard(){
             read ficheiro
             if [ -f $ficheiro  ]; then # verifica se o fich. existe
                 clear
-                echo "✅ Ficheiro $ficheiro encontrado"
+                echo -e "✅ Ficheiro $ficheiro encontrado\n"
                 SWITCHBOARD_FILE=$ficheiro
                 FILE_LOCATED=true
                 break
@@ -43,22 +45,38 @@ SwitchBoard(){
 # caso não existam cria as mesmas
 CheckFolderStructure(){
     echo -e "\n🛠  Incializando a verificação da estrutura de diretorias\n"
+    $felling
     for dir in ${DIRS[@]};
     do
         echo -n "🔎  Verificando a existência da diretoria '$dir'"
         if [ -d $dir ]; then
+            $felling
             echo " ✅"
         else
             echo " ❌"
-            echo "    📂 diretoria inexistente criando diretoria '$dir'"
+            echo -n "    📂 diretoria inexistente criando diretoria '$dir'"
+            $felling
             mkdir $dir
+            [[ $? -eq 0 ]] && echo " ✅" || echo " ❎"
         fi
     done
-    echo " Diretorias 🆗"
+    echo -e "Diretorias 🆗\n"
     DIR_STRUCT_OK=true
 }
 
+# Função para chamar o ficheiro para fazer o unzip do switchboard
+Unzip_Switchboard(){
+    clear >$(tty)
+    if [ -f scripts/unzip_switchboard.sh ]; then
+        source scripts/unzip_switchboard.sh
+    else
+        echo "Ficheiro 'unzip_switchboard.sh' não localizado"
+        # TODO realizar o download do ficheiro quando não encontrado (git?)
+    fi
+}
+
 while true; do
+    clear >$(tty)
     echo "Bem vindo ao gerador de corpus para o Eugénio V3!"
     echo "-------------------------------------------------"
     if ! $DIR_STRUCT_OK; then
@@ -69,14 +87,17 @@ while true; do
     if ! $FILE_LOCATED; then
         SwitchBoard
     else
-        echo "Ficheiro do switchboard 🆗"
+        echo -e "Ficheiro do switchboard 🆗 \n"
     fi
     echo "Escolha a opção pretendida"
     echo "--------------------------"
     echo " 0 - sair"
+    echo " 1 - descompactar o switchboard"
+    echo " "
     read -p " -> " option
     case $option in
-        0) break
+        0) break ;;
+        1) Unzip_Switchboard 
     esac
 done
 
