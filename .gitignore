@@ -1,2 +1,4 @@
 *.zip
 /*.pdf
+/corpus/*.txt
+/corpus_txt/
