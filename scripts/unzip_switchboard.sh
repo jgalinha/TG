@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
+# unzip_switchboard.sh
+# Autores: José Galinha, Luis Adriano
 set -euo pipefail
 
-echo -e "Iniciando descompactação do ficheiro $SWITCHBOARD_FILE 🗜"
-$felling
+echo -e "🚀 Iniciando descompactação do ficheiro $SWITCHBOARD_FILE 🗜"
+$feeling
 # comando unzip que apenas extrai os ficheiros txt do arquivo
 # https://unix.stackexchange.com/questions/59276/how-to-extract-only-a-specific-folder-from-a-zipped-archive-to-a-given-directory
 unzip -uqj $SWITCHBOARD_FILE "switchboard/*.txt" -d corpus 
-$felling
+$feeling
 
 if [ $? -eq 0 ]; then # verifica se o comando unzip concluiu com sucesso
     echo "Ficheiros extraidos com sucesso ✅" 
@@ -19,11 +21,11 @@ if [ $? -eq 0 ]; then # verifica se o comando unzip concluiu com sucesso
     done
     echo " ✅ ficheiro criado com sucesso"
     echo -n "Movendo o ficheiro para a diretoria 'corpus_txt'"
-    $felling
+    $feeling
     # verifica se o ficheiro já existe, se existir apaga-o
     [[ -f corpus_txt/switchboard.txt ]] && rm corpus_txt/switchboard.txt
     mv corpus/output corpus_txt/switchboard.txt
-    $felling
+    $feeling
     # verifica se o comando mv teve sucesso, e mostra o output correspondente
     [[ $? -eq 0 ]] && echo " ✅" || echo " ❎"
     echo "📄 Ficheiro criado em 'corpus_txt/switchboard.txt'"

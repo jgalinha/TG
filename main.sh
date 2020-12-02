@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+# Autores: José Galinha, Luis Adriano
+# Main script para utilização no trabalho de grupo 1 da disciplina SO
+# 
 set -euo pipefail
 
 # Variável que define o nome do ficheiro a localizar por defeitos
@@ -7,13 +10,14 @@ SWITCHBOARD_FILE="switchboard.zip"
 DIRS=("scripts" "corpus" "corpus_txt" "corpus_info" "words_dic" "sentences_dic")
 FILE_LOCATED=false
 DIR_STRUCT_OK=false
-felling="sleep 0.5"
+CORPUS_TXT='corpus_txt/switchboard.txt'
+feeling="sleep 0.5"
 
 # Função que procura o ficheiro do switchboard e se não encontrar solicita a sua
 # localização
 SwitchBoard(){
     echo "🔎 Localizando o ficheiro $SWITCHBOARD_FILE"
-    $felling
+    $feeling
     if [ -f $SWITCHBOARD_FILE ]; then # Verifica se o fich. se encontra na dir
         echo -e "✅ Ficheiro $SWITCHBOARD_FILE encontrado\n"
         FILE_LOCATED=true
@@ -45,17 +49,17 @@ SwitchBoard(){
 # caso não existam cria as mesmas
 CheckFolderStructure(){
     echo -e "\n🛠  Incializando a verificação da estrutura de diretorias\n"
-    $felling
+    $feeling
     for dir in ${DIRS[@]};
     do
         echo -n "🔎  Verificando a existência da diretoria '$dir'"
         if [ -d $dir ]; then
-            $felling
+            $feeling
             echo " ✅"
         else
             echo " ❌"
             echo -n "    📂 diretoria inexistente criando diretoria '$dir'"
-            $felling
+            $feeling
             mkdir $dir
             [[ $? -eq 0 ]] && echo " ✅" || echo " ❎"
         fi
@@ -70,9 +74,25 @@ Unzip_Switchboard(){
     if [ -f scripts/unzip_switchboard.sh ]; then
         source scripts/unzip_switchboard.sh
     else
-        echo "Ficheiro 'unzip_switchboard.sh' não localizado"
-        # TODO realizar o download do ficheiro quando não encontrado (git?)
+        echo -e "❌ ficheiro 'unzip_switchboard.sh' não localizado\n"
+        # todo nrealizar o download do ficheiro quando não encontrado (git?)
+        echo -en "\npressione qualquer tecla para voltar ao menu anterior!"
+        read -n 1
     fi
+}
+
+# Função para chamar o ficheiro que faz a caracterização do corpus
+Caracterizar_Corpus(){
+    clear
+    if [ -f scripts/caracterizar_corpus.sh ]; then
+        source scripts/caracterizar_corpus.sh
+    else
+        echo -e "❌ ficheiro 'caracterizar_corpus.sh' não localizado\n"
+        # todo realizar o download do ficheiro quando não encontrado (git?)
+        echo -en "\npressione qualquer tecla para voltar ao menu anterior!"
+        read -n 1
+    fi
+    read
 }
 
 while true; do
@@ -93,11 +113,13 @@ while true; do
     echo "--------------------------"
     echo " 0 - sair"
     echo " 1 - descompactar o switchboard"
+    echo " 2 - caracterizar o corpus utilizado (switchboard)"
     echo " "
     read -p " -> " option
     case $option in
         0) break ;;
-        1) Unzip_Switchboard 
+        1) Unzip_Switchboard ;; 
+        2) Caracterizar_Corpus
     esac
 done
 
