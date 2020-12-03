@@ -95,6 +95,19 @@ Caracterizar_Corpus(){
     read
 }
 
+Criar_Ficheiro_Palavras(){
+    clear
+    if [ -f scripts/criar_ficheiro_palavras.sh ]; then
+        source scripts/criar_ficheiro_palavras.sh
+    else
+        echo -e "❌ ficheiro 'criar_ficheiro_palavras.sh' não localizado\n"
+        # todo realizar o download do ficheiro quando não encontrado (git?)
+        echo -en "\npressione qualquer tecla para voltar ao menu anterior!"
+        read -n 1
+    fi
+    read
+}
+
 while true; do
     clear >$(tty)
     echo "Bem vindo ao gerador de corpus para o Eugénio V3!"
@@ -113,13 +126,15 @@ while true; do
     echo "--------------------------"
     echo " 0 - sair"
     echo " 1 - descompactar o switchboard"
-    echo " 2 - caracterizar o corpus utilizado (switchboard)"
+    echo " 2 - caracterizar o corpus utilizado (corpus_info.txt)"
+    echo " 3 - criar ficheiro de palavras (words.txt)"
     echo " "
     read -p " -> " option
     case $option in
         0) break ;;
         1) Unzip_Switchboard ;; 
-        2) Caracterizar_Corpus
+        2) Caracterizar_Corpus ;;
+        3) Criar_Ficheiro_Palavras 
     esac
 done
 
