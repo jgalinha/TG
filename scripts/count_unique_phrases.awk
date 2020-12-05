@@ -3,7 +3,7 @@
 
 BEGIN{
     # Delimitadores de frases
-    RS="[\n\t.]+";   
+    RS="[\n\t!?,:;..{3}]+";   
 }
 
 # Verifica se a frase começa por uma letra ou mais e são começa por um ou mais

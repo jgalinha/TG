@@ -27,3 +27,4 @@ fi
 
 echo -en "\nPressione qualquer tecla para voltar ao menu anterior!"
 read -n 1
+ 
