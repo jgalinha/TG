@@ -9,7 +9,8 @@ BEGIN{
 # && nao conter dois travessoes seguidos 
 #( $0 ~ /^[-A-Za-záéíóúÁÉÍÓÚàÀâÂêÊôÔãÃõÕçÇ]+$/ ) && ( $0 !~ /\-\-/) {
 ( $0 ~ /[A-Za-z]+/ ) && ( $0 !~ /\-\-/) {
-    i++;
+    if (length($0) > 1)
+        i++;
 }
 
 END{

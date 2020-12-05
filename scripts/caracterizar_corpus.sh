@@ -36,7 +36,7 @@ fi
 if $control; then
     echo -e "Caracterizando o corpus... 📃\n"
     number_of_chars=$(wc -m $CORPUS_TXT | $cmd '{print $1}')
-    number_of_non_empty_lines=$(sed '/^\s*$/d' $CORPUS_TXT | wc -l)
+    number_of_non_empty_lines=$(sed '/^\s*$/' $CORPUS_TXT | wc -l)
     unique_words=$(cat $CORPUS_TXT | $cmd -f $CUW )
     words=$(cat $CORPUS_TXT | $cmd -f $CW)
     quociente_palavras=$(awk "BEGIN{print ($unique_words * 100) / $words}")
