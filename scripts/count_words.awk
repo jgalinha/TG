@@ -9,7 +9,6 @@ BEGIN{
 # && nao conter dois travessoes seguidos 
 #( $0 ~ /^[-A-Za-záéíóúÁÉÍÓÚàÀâÂêÊôÔãÃõÕçÇ]+$/ ) && ( $0 !~ /\-\-/) {
 ( $0 ~ /[A-Za-z]+/ ) && ( $0 !~ /\-\-/) {
-    print $0
     i++;
 }
 
