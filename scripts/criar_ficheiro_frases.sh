@@ -4,8 +4,8 @@
 # 
 set -euo pipefail
 
-WT="scripts/words_table.awk"
-OUTPUT_FILE="words_dic/words.txt"
+WT="scripts/unique_phrases.awk"
+OUTPUT_FILE="sentences_dic/sentences.txt"
 
 
 # verifica a existência do prog. nawk, em alternativa usa o awk
@@ -14,7 +14,7 @@ OUTPUT_FILE="words_dic/words.txt"
 if [ ! -f $WT ]; then
     echo "❎ O ficheiro '$WT' não foi encontrado, o programa não pode continuar" 
 else
-    echo -e "Criando o ficheiro de palavras ... 📝\n"
+    echo -e "Criando o ficheiro de frases ... 📝\n"
     # Criação do ficheiro de criação de palavras
     cat $CORPUS_TXT | $cmd -f $WT | sort -k 1 > $OUTPUT_FILE
     # Verifica se o comando anterior foi concluido com sucesso
@@ -23,4 +23,3 @@ fi
 
 echo -en "\nPressione qualquer tecla para voltar ao menu anterior!"
 read -n 1
- 
