@@ -12,6 +12,7 @@ FILE_LOCATED=false
 DIR_STRUCT_OK=false
 SCRIPT="scripts/criar_ficheiros.sh" # script usado para criar os vários ficheiro de texto
 CORPUS_TXT='corpus_txt/switchboard.txt'
+LIMIT=250000 # Limite de linhas na criação dos ficheiros
 feeling="sleep 0.5"
 
 # Função que procura o ficheiro do switchboard e se não encontrar solicita a sua
