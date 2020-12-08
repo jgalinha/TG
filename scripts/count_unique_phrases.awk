@@ -1,5 +1,9 @@
 #!/usr/bin/awk
-# count_phrases.awk
+###############################################################################
+#                           count_unique_phrases.awk                          #
+# Autores: José Galinha, Luis Adriano #########################################
+# Ficheiro para contar as frases unicas num ficheiro de texto ################# 
+###############################################################################
 
 BEGIN{
     # Delimitadores de frases
@@ -9,8 +13,8 @@ BEGIN{
 {
     # Vamos eliminar todos os espaços brancos no inicio das linhas com o gsub
     gsub(/^[[:blank:]]+/,"",$0)
-    #  Não conta todas as linhas que têm só uma letra (não são frases!)
-    if (NF > 1){
+    #  Com este IF estamos a garantir que não contamos linhas vazias
+    if (NF > 0){
         if ($0 in tabela)
             tabela[$0] ++;
         else

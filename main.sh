@@ -10,6 +10,7 @@ SWITCHBOARD_FILE="switchboard.zip"
 DIRS=("scripts" "corpus" "corpus_txt" "corpus_info" "words_dic" "sentences_dic")
 FILE_LOCATED=false
 DIR_STRUCT_OK=false
+SCRIPT="scripts/criar_ficheiros.sh" # script usado para criar os vários ficheiro de texto
 CORPUS_TXT='corpus_txt/switchboard.txt'
 feeling="sleep 0.5"
 
@@ -72,7 +73,7 @@ CheckFolderStructure(){
 Carregar_Script() {
     clear
     if [ -f $1 ]; then
-        source $1
+        source $1 ${2:-""} ${3:-""}
     else
         echo -e "❌ ficheiro '$1 não localizado\n"
         # todo realizar o download do ficheiro quando não encontrado (git?)
@@ -110,10 +111,10 @@ while true; do
         0) break ;;
         1) Carregar_Script "scripts/unzip_switchboard.sh" ;; 
         2) Carregar_Script "scripts/caracterizar_corpus.sh" ;;
-        3) Carregar_Script "scripts/criar_ficheiro_palavras.sh" ;;
-        4) Carregar_Script "scripts/criar_ficheiro_par_palavras.sh" ;;
-        5) Carregar_Script "scripts/criar_ficheiro_frases.sh" ;;
-        6) Carregar_Script "scripts/criar_ficheiro_par_frases.sh"
+        3) Carregar_Script $SCRIPT "words_table.awk" "words_dic/words.txt" ;;
+        4) Carregar_Script $SCRIPT "word_pairs.awk" "words_dic/words_pairs.txt" ;;
+        5) Carregar_Script $SCRIPT "unique_phrases.awk" "sentences_dic/sentences.txt" ;;
+        6) Carregar_Script $SCRIPT "pair_phrases.awk" "sentences_dic/sentences_pair.txt" 
     esac
 done
 

@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
-# Autores: José Galinha, Luis Adriano
-#
-# TODO Comantários
-# 
+###############################################################################
+#                            caracterizar_corpus.sh                           #
+# Autores: José Galinha, Luis Adriano #########################################
+# Ficheiro que chama dos vários scripts para realizar a caract. do corpus #####
+###############################################################################
+
 set -euo pipefail
 
 CUW="scripts/count_unique_words.awk"

@@ -1,4 +1,9 @@
 #!/usr/bin/awk
+###############################################################################
+#                            count_unique_words.awk                           #
+# Autores: José Galinha, Luis Adriano #########################################
+# Ficheiro para contar as palavras unicas num ficheiro de texto ###############
+###############################################################################
 
 BEGIN{
     RS="[ \n\t,.«»:)(;/?\"!]+";   

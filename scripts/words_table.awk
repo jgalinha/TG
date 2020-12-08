@@ -1,7 +1,9 @@
 #!/usr/bin/awk
-# Autores: José Galinha, Luis Adriano
-# 
-#  words_table.awk
+###############################################################################
+#                               words_table.awk                               #
+# Autores: José Galinha, Luis Adriano #########################################
+# Ficheiro para contar o numero de ocorrências de uma palavra num ficheiro ####
+###############################################################################
 
 BEGIN{
     RS="[ \n\t,.«»:)(;/?\"\"!]+";   

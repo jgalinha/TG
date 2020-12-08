@@ -1,7 +1,8 @@
 #!/usr/bin/awk
 ###############################################################################
 #                                word_pairs.awk                               #
-# Autores: José Galinha, Luis Adriano                                         #
+# Autores: José Galinha, Luis Adriano #########################################
+# Ficheiro para contar o numero de ocorrência de pares de palavras num fich. ##
 ###############################################################################
 
 BEGIN{
