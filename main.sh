@@ -68,70 +68,17 @@ CheckFolderStructure(){
     DIR_STRUCT_OK=true
 }
 
-# Função para chamar o ficheiro para fazer o unzip do switchboard
-Unzip_Switchboard(){
-    clear >$(tty)
-    if [ -f scripts/unzip_switchboard.sh ]; then
-        source scripts/unzip_switchboard.sh
-    else
-        echo -e "❌ ficheiro 'unzip_switchboard.sh' não localizado\n"
-        # todo nrealizar o download do ficheiro quando não encontrado (git?)
-        echo -en "\npressione qualquer tecla para voltar ao menu anterior!"
-        read -n 1
-    fi
-}
-
-# Função para chamar o ficheiro que faz a caracterização do corpus
-Caracterizar_Corpus(){
+# Função para carregar os scripts
+Carregar_Script() {
     clear
-    if [ -f scripts/caracterizar_corpus.sh ]; then
-        source scripts/caracterizar_corpus.sh
+    if [ -f $1 ]; then
+        source $1
     else
-        echo -e "❌ ficheiro 'caracterizar_corpus.sh' não localizado\n"
+        echo -e "❌ ficheiro '$1 não localizado\n"
         # todo realizar o download do ficheiro quando não encontrado (git?)
         echo -en "\npressione qualquer tecla para voltar ao menu anterior!"
         read -n 1
     fi
-    read
-}
-
-Criar_Ficheiro_Palavras(){
-    clear
-    if [ -f scripts/criar_ficheiro_palavras.sh ]; then
-        source scripts/criar_ficheiro_palavras.sh
-    else
-        echo -e "❌ ficheiro 'criar_ficheiro_palavras.sh' não localizado\n"
-        # todo realizar o download do ficheiro quando não encontrado (git?)
-        echo -en "\npressione qualquer tecla para voltar ao menu anterior!"
-        read -n 1
-    fi
-    read
-}
-
-Criar_Ficheiro_Par_Palavras(){
-    clear
-    if [ -f scripts/criar_ficheiro_par_palavras.sh ]; then
-        source scripts/criar_ficheiro_par_palavras.sh
-    else
-        echo -e "❌ ficheiro 'criar_ficheiro_par_palavras.sh' não localizado\n"
-        # todo realizar o download do ficheiro quando não encontrado (git?)
-        echo -en "\npressione qualquer tecla para voltar ao menu anterior!"
-        read -n 1
-    fi
-    read
-}
-
-Criar_Ficheiro_Frases(){
-    clear
-    if [ -f scripts/criar_ficheiro_frases.sh ]; then
-        source scripts/criar_ficheiro_frases.sh
-    else
-        echo -e "❌ ficheiro 'criar_ficheiro_frases.sh' não localizado\n"
-        # todo realizar o download do ficheiro quando não encontrado (git?)
-        echo -en "\npressione qualquer tecla para voltar ao menu anterior!"
-        read -n 1
-    fi
-    read
 }
 
 while true; do
@@ -156,15 +103,17 @@ while true; do
     echo " 3 - criar ficheiro de palavras (words.txt)"
     echo " 4 - criar ficheiro de pares palavras (words_pairs.txt)"
     echo " 5 - criar ficheiro de frases (sentences.txt)"
+    echo " 6 - criar ficheiro de pares de frases (sentences_pairs.txt)"
     echo " "
     read -p " -> " option
     case $option in
         0) break ;;
-        1) Unzip_Switchboard ;; 
-        2) Caracterizar_Corpus ;;
-        3) Criar_Ficheiro_Palavras ;;
-        4) Criar_Ficheiro_Par_Palavras ;;
-        5) Criar_Ficheiro_Frases
+        1) Carregar_Script "scripts/unzip_switchboard.sh" ;; 
+        2) Carregar_Script "scripts/caracterizar_corpus.sh" ;;
+        3) Carregar_Script "scripts/criar_ficheiro_palavras.sh" ;;
+        4) Carregar_Script "scripts/criar_ficheiro_par_palavras.sh" ;;
+        5) Carregar_Script "scripts/criar_ficheiro_frases.sh" ;;
+        6) Carregar_Script "scripts/criar_ficheiro_par_frases.sh"
     esac
 done
 
