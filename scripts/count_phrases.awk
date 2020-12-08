@@ -7,12 +7,13 @@ BEGIN{
     z=0;
 }
 
-# Verifica se a frase começa por uma letra ou mais e são começa por um ou mais
-# espaço ou TAB
-( $0 ~ /^[A-Za-z]+/) && ($0 !~ /^[  \t]+/){
-
-    #$0.gsub(/^[ \t]+|[ \t]+$/, "")
-    z++;
+{
+    # Vamos eliminar todos os espaços brancos no inicio das linhas com o gsub
+    gsub(/^[[:blank:]]+/,"",$0)
+    # Com este if estamos a expluir todas as linhas que só têm uma palavra
+    if (NF > 1) {
+        z++;
+    }
 }
 
 END{
