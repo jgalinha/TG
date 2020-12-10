@@ -5,7 +5,43 @@
 @ECHO OFF
 :: Windows version check
 IF NOT "%OS%"=="Windows_NT" GOTO NotWindows
+:: ### START UAC SCRIPT ###
+:: https://stackoverflow.com/questions/14639743/batch-script-to-run-as-administrator
+if "%2"=="firstrun" exit
+cmd /c "%0" null firstrun
 
+if "%1"=="skipuac" goto skipuacstart
+
+:checkPrivileges
+NET FILE 1>NUL 2>NUL
+if '%errorlevel%' == '0' ( goto gotPrivileges ) else ( goto getPrivileges )
+
+:getPrivileges
+if '%1'=='ELEV' (shift & goto gotPrivileges)
+
+setlocal DisableDelayedExpansion
+set "batchPath=%~0"
+setlocal EnableDelayedExpansion
+ECHO Set UAC = CreateObject^("Shell.Application"^) > "%temp%\OEgetPrivileges.vbs"
+ECHO UAC.ShellExecute "!batchPath!", "ELEV", "", "runas", 1 >> "%temp%\OEgetPrivileges.vbs"
+"%temp%\OEgetPrivileges.vbs"
+exit /B
+
+:gotPrivileges
+
+setlocal & pushd .
+
+cd /d %~dp0
+cmd /c "%0" skipuac firstrun
+cd /d %~dp0
+
+:skipuacstart
+
+if "%2"=="firstrun" exit
+
+:: ### END UAC SCRIPT ###
+
+:: ### START OF YOUR OWN BATCH SCRIPT BELOW THIS LINE ###
 :: Comando para permitir os caracteres unicode
 chcp 1252
 SET DIR=Eugénio
@@ -42,6 +78,7 @@ COPY /y ".\words_dic\words_pairs.txt" "%DEST%\geral.par"
 COPY /y ".\sentences_dic\sentences.txt" "%DEST%\geral.frs"
 COPY /y ".\sentences_dic\sentences_pairs.txt" "%DEST%\geral.paf"
 ECHO " Ficheiros copiados!"
+pause
 GOTO Exit
 
 :NotWindows
