@@ -115,7 +115,7 @@ while true; do
         3) Carregar_Script $SCRIPT "words_table.awk" "words_dic/words.txt" ;;
         4) Carregar_Script $SCRIPT "word_pairs.awk" "words_dic/words_pairs.txt" ;;
         5) Carregar_Script $SCRIPT "unique_phrases.awk" "sentences_dic/sentences.txt" ;;
-        6) Carregar_Script $SCRIPT "pair_phrases.awk" "sentences_dic/sentences_pair.txt" 
+        6) Carregar_Script $SCRIPT "pair_phrases.awk" "sentences_dic/sentences_pairs.txt"
     esac
 done
 
