@@ -44,7 +44,7 @@ if $control; then
     quociente_palavras=$(awk "BEGIN{print ($unique_words * 100) / $words}")
     phrases=$(cat $CORPUS_TXT | $cmd -f $CP)
     unique_phrases=$(cat $CORPUS_TXT | $cmd -f $CUP)
-    quociente_frases=$(awk "BEGIN{print ($unique_phrases * 100_) / $phrases}")
+    quociente_frases=$(awk "BEGIN{print ($unique_phrases * 100) / $phrases}")
     
     echo "Número de caracteres: $number_of_chars" > $OUTPUT_FILE
     echo "Número de linhas não vazias: $number_of_non_empty_lines" >> $OUTPUT_FILE
