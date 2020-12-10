@@ -6,3 +6,6 @@
 /words_dic/
 /sentences_dic/*.txt
 /Eugénio V3 64 bits.exe
+*.pygtex
+/text.txt
+/.auctex-auto/
